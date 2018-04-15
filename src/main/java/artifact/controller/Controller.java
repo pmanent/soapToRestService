@@ -13,14 +13,16 @@ import vrmsConnectionServices.wsdl.IsAvailableRS;
 
 @RestController
 public class Controller {
+	
 	@Autowired
 	private SOAPClient client;
+	
 	public Controller() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	@RequestMapping("/")
-    public String index() {
-		
+    public String index() {	
         return "Greetings from Spring Boot!";
     }
 	

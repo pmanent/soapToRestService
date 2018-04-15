@@ -31,9 +31,19 @@ public class SOAPClient  extends WebServiceGatewaySupport{
 		
 		response = (IsAvailableRS)this.getWebServiceTemplate().marshalSendAndReceive("http://ws.avantio.com/soap/vrmsConnectionServices.php?wsdl",
 				request,
-				new SoapActionCallback("http://ws.avantio.com/soap/vrmsConnectionServices.php/IsAvailable"));
+				new SoapActionCallback("http://ws.avantio.com/soap/vrmsConnectionServices.php"));
 		
 		return response;
+	}
+	
+	public Object marshalSendAndReceive(IsAvailableRQ request){
+		return this.getWebServiceTemplate().marshalSendAndReceive("http://ws.avantio.com/soap/vrmsConnectionServices.php?wsdl",
+				request,
+				new SoapActionCallback("http://ws.avantio.com/soap/vrmsConnectionServices.php"));
+	}
+	
+	public SoapActionCallback createCallback(){
+		return new SoapActionCallback("http://ws.avantio.com/soap/vrmsConnectionServices.php");
 	}
 
 }
