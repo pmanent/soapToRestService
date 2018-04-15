@@ -48,6 +48,7 @@
                         </goals>
                     </execution>
                 </executions>
+                <!-- 
                 <configuration>
                     <schemaLanguage>WSDL</schemaLanguage>
                     <generatePackage>vrmsConnectionServices.wsdl</generatePackage>
@@ -56,6 +57,15 @@
                             <url>http://ws.avantio.com/soap/vrmsConnectionServices.php?wsdl</url>
                         </schema>
                     </schemas>
+                    
+                </configuration>-->
+                <configuration>
+                	<schemaLanguage>WSDL</schemaLanguage>
+                    <generatePackage>vrmsConnectionServices.wsdl</generatePackage>
+                	<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+                    <schemaIncludes>
+                        <include>*.wsdl</include>
+					</schemaIncludes>
                 </configuration>
             </plugin>
             <!-- end::wsdl[] -->
