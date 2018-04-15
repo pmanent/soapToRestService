@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import artifact.soap.client.CountryClient;
-import hello.wsdl.Country;
-import hello.wsdl.GetCountryResponse;
+import artifact.soap.client.SOAPClient;
+import vrmsConnectionServices.wsdl.IsAvailableRS;
 
 @RestController
 public class Controller {
 	@Autowired
-	private CountryClient countryClient;
+	private SOAPClient client;
 	public Controller() {
 		// TODO Auto-generated constructor stub
 	}
@@ -28,16 +27,16 @@ public class Controller {
     }
 	
 	
-	@RequestMapping(value = "/findByName", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/isAvailable", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public String searchByName(@RequestParam("name") String name){
+	public String searchByName(){
 		
-		GetCountryResponse response = countryClient.getCountries(name);
-		Country country = response.getCountry();
+		IsAvailableRS response = client.isAvailable();
+		
 		
 		
 		Gson gson = new Gson();
 		
-		return gson.toJson(country);
+		return gson.toJson(response);
 	}
 }

@@ -14,14 +14,15 @@ public class CountryConfiguration {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		// this package must match the package in the <generatePackage> specified in
 		// pom.xml
-		marshaller.setContextPath("hello.wsdl");
+		marshaller.setContextPath("vrmsConnectionServices.wsdl");
 		return marshaller;
 	}
 
 	@Bean
-	public CountryClient countryClient(Jaxb2Marshaller marshaller) {
-		CountryClient client = new CountryClient();
-		client.setDefaultUri("http://localhost:8081/ws/countries.wsdl");
+	public SOAPClient countryClient(Jaxb2Marshaller marshaller) {
+		
+		SOAPClient client = new SOAPClient();
+		client.setDefaultUri("http://ws.avantio.com/soap/vrmsConnectionServices.php?wsdl");
 		client.setMarshaller(marshaller);
 		client.setUnmarshaller(marshaller);
 		return client;
