@@ -16,7 +16,7 @@ public class SOAPClient  extends WebServiceGatewaySupport{
 	
 	public IsAvailableRS isAvailable(){
 		
-		IsAvailableRS response = null;
+		
 		IsAvailableRQ request = new IsAvailableRQ();
 		
 		Credentials credentials = new Credentials();
@@ -29,9 +29,10 @@ public class SOAPClient  extends WebServiceGatewaySupport{
 		
 		request.setCriteria(criteria);
 		
-		response = (IsAvailableRS)this.getWebServiceTemplate().marshalSendAndReceive("http://ws.avantio.com/soap/vrmsConnectionServices.php?wsdl",
+		IsAvailableRS response = null;
+		response = (IsAvailableRS)this.getWebServiceTemplate().marshalSendAndReceive("http://ws.avantio.com/soap/vrmsConnectionServices.php",
 				request,
-				new SoapActionCallback("http://ws.avantio.com/soap/vrmsConnectionServices.php"));
+				new SoapActionCallback("IsAvailable"));
 		
 		return response;
 	}

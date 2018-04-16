@@ -52,7 +52,7 @@ public class SOAPClientSAAJ {
         SOAPElement soapBodyElem = soapBody.addChildElement("CelsiusToFahrenheit", myNamespace);
         SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("Celsius", myNamespace);
         soapBodyElem1.addTextNode("100");
-    }
+    } 
 
     private static void callSoapWebService(String soapEndpointUrl, String soapAction) {
         try {
