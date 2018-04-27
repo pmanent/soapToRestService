@@ -1,5 +1,6 @@
 package artifact.soap.client;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,19 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ws.client.WebServiceClientException;
-import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Iterator;
+
+import javax.xml.bind.JAXBElement;
+
+import vrmsConnectionServices.wsdl.AccommodationState;
+import vrmsConnectionServices.wsdl.AccommodationStateList;
 import vrmsConnectionServices.wsdl.AvailableCriteria;
 import vrmsConnectionServices.wsdl.Credentials;
+import vrmsConnectionServices.wsdl.GetAccommodationStatusRQ;
+import vrmsConnectionServices.wsdl.GetAccommodationStatusRS;
 import vrmsConnectionServices.wsdl.IsAvailableRQ;
 import vrmsConnectionServices.wsdl.IsAvailableRS;
 
@@ -38,32 +46,38 @@ public class ClientTest {
 	
 	
 	@Test
+	@Ignore
 	public void isAvailableTest(){
-		try {
-			IsAvailableRS response = client.isAvailable();
-			assertThat(response).isNotNull();
-		} catch (WebServiceClientException e) {
-			// TODO Auto-generated catch block
-			assertThat(e).isNotNull();
-		}
+		IsAvailableRS response = client.isAvailable();
+		assertThat(response).isNotNull();
 	}
 	
 	
-	private IsAvailableRQ generateRequest(){
-		
-		IsAvailableRQ request = new IsAvailableRQ();
-		
-		Credentials credentials = new Credentials();
-		credentials.setLanguage("ca_CA");
-		credentials.setPassword("pass");
-		credentials.setUserName("pmanent");
-		request.setCredentials(credentials);
-		
-		AvailableCriteria criteria = new AvailableCriteria();
-		
-		request.setCriteria(criteria);
-		
-		return request;
+	@Test
+	@Ignore
+	public void GetRatesListRS(){
+		vrmsConnectionServices.wsdl.GetRatesListRS response = client.getRatesList();
+		assertThat(response).isNotNull();
 	}
+	@Test
+	public void getAccommodationStatusTest(){
+		JAXBElement<GetAccommodationStatusRS> response = (JAXBElement<GetAccommodationStatusRS>)client.getAccommodationStatus();
+		GetAccommodationStatusRS rs = response.getValue();
+		Iterator<AccommodationState> it = rs.getAccommodationList().getAccommodationRS().iterator();
+		while(it.hasNext()){
+			AccommodationState acom=it.next();
+			System.out.println("*******************************    ");
+			System.out.println("Imprimim un acomodation");
+			System.out.println(acom.getAccommodationCode());
+			System.out.println(acom.getAvailableCode());
+			System.out.println(acom.getCurrency());
+			System.out.println(acom.getRoomOnlyPrice());
+			System.out.println(acom.getRoomOnlyWithoutOfferPrice());
+			System.out.println("*******************************    ");
+			System.out.println("*******************************    ");
+		}	
 
+		assertThat(rs).isNotNull();
+
+	}
 }

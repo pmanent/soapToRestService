@@ -21,12 +21,6 @@ public class Controller {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@RequestMapping("/")
-    public String index() {	
-        return "Greetings from Spring Boot!";
-    }
-	
-	
 	@RequestMapping(value = "/isAvailable", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public String searchByName(){
