@@ -68,7 +68,7 @@ public class ClientTest {
 			AccommodationState acom=it.next();
 			System.out.println("*******************************    ");
 			System.out.println("Imprimim un acomodation");
-			System.out.println(acom.getAccommodationCode());
+			System.out.println("getAccommodationCode "+acom.getAccommodationCode());
 			System.out.println(acom.getAvailableCode());
 			System.out.println(acom.getCurrency());
 			System.out.println(acom.getRoomOnlyPrice());
